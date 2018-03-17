@@ -1,0 +1,11 @@
+{
+  "name": "react-native-smart-emoji-picker",
+  "version": "0.1.0",
+  "main": "src/index.js",
+  "repository": "git@github.com:just4fun/react-native-smart-emoji-picker.git",
+  "author": "just4fun <houritsunohikari@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "react-native-scrollable-tab-view": "^0.8.0"
+  }
+}
