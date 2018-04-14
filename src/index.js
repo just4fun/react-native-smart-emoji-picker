@@ -3,10 +3,10 @@ import {
   View,
   Image,
   Animated,
+  Dimensions,
   StyleSheet,
   TouchableOpacity
 } from 'react-native';
-import Dimensions from 'Dimensions';
 import ScrollableTabView from 'react-native-scrollable-tab-view';
 import EmojiTabBar from '../lib/EmojiTabBar';
 import EmojiDotTabBar from '../lib/EmojiDotTabBar';
