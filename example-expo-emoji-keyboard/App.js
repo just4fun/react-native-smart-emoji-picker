@@ -17,7 +17,7 @@ export default class App extends React.Component {
     super(props);
     this.state = {
       selectedPanel: 'keyboard',
-      content: null
+      content: ''
     };
   }
 
@@ -78,6 +78,7 @@ export default class App extends React.Component {
           <KeyboardAccessory>
             <View style={styles.keyboardAccessoryContainer}>
               <TextInput
+                ref={component => this.contentInput = component}
                 style={styles.input}
                 value={content}
                 onFocus={() => this.setState({
@@ -87,7 +88,7 @@ export default class App extends React.Component {
                   selectedPanel: 'keyboard'
                 })}
                 onSelectionChange={(event) => this.handleContentSelectionChange(event)}
-                onChangeText={(text) => this.setState({ replyContent: text })}
+                onChangeText={(text) => this.setState({ content: text })}
                 placeholder='Click me!' />
               {selectedPanel === 'emoji' &&
                 <Icon
@@ -108,12 +109,10 @@ export default class App extends React.Component {
                 size={30}
                 onPress={this.hideKeyboard} />
             </View>
-            {selectedPanel === 'emoji' &&
-              <EmojiPicker
-                emojis={CUSTOM_EMOJIS}
-                selectedPanel={selectedPanel}
-                handleEmojiPress={this.handleEmojiPress} />
-            }
+            <EmojiPicker
+              emojis={CUSTOM_EMOJIS}
+              showEmojiPicker={selectedPanel === 'emoji'}
+              handleEmojiPress={this.handleEmojiPress} />
           </KeyboardAccessory>
         </View>
       </SafeAreaView>

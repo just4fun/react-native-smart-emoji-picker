@@ -17,25 +17,44 @@ export default class EmojiPicker extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      height: new Animated.Value(this.props.selectedPanel !== 'keyboard' ? 250 : 0),
+      height: new Animated.Value(props.showEmojiPicker ? 250 : 0),
     };
   }
 
   componentDidUpdate() {
     Animated.timing(this.state.height, {
       duration: 300,
-      toValue: this.props.selectedPanel !== 'keyboard' ? 250 : 0
+      toValue: this.props.showEmojiPicker ? 250 : 0
     }).start();
   }
 
+  renderEmojiTabBar = (props) => {
+    return (
+      this.props.showEmojiPicker &&
+        <EmojiTabBar {...props} />
+        ||
+        <View></View>
+    );
+  }
+
+  renderEmojiDotTabBar(props) {
+    return (
+      <EmojiDotTabBar {...props} />
+    );
+  }
+
+  handleEmojiPress(emoji) {
+    this.props.handleEmojiPress(emoji);
+  }
+
   render() {
-    let { emojis } = this.props;
+    let { emojis, showEmojiPicker } = this.props;
     let { height } = this.state;
 
     return (
       <Animated.View style={{ height }}>
         <ScrollableTabView
-          renderTabBar={(props) => <EmojiTabBar {...props} />}
+          renderTabBar={this.renderEmojiTabBar}
           tabBarPosition='bottom'>
             {Object.keys(emojis).map((key, groupIndex) => {
               let pageView = [];
@@ -54,7 +73,7 @@ export default class EmojiPicker extends Component {
                         <TouchableOpacity
                           key={emojiIndex}
                           style={styles.image}
-                          onPress={() => this.props.handleEmojiPress(emoji)}>
+                          onPress={this.handleEmojiPress.bind(this, emoji)}>
                           <Image
                             style={styles.image}
                             resizeMode={'contain'}
@@ -69,7 +88,7 @@ export default class EmojiPicker extends Component {
               return (
                 <ScrollableTabView
                   key={groupIndex}
-                  renderTabBar={(props) => <EmojiDotTabBar {...props} />}
+                  renderTabBar={this.renderEmojiDotTabBar}
                   tabLabel={emojis[key][0].image}
                   tabBarPosition='bottom'>
                   {pageView}
