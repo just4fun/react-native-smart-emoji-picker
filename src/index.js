@@ -75,7 +75,7 @@ export default class EmojiPicker extends Component {
         <ScrollableTabView
           renderTabBar={this.renderEmojiTabBar}
           tabBarPosition='bottom'>
-            {Object.keys(emojis).map((key, groupIndex) => {
+            {Object.keys(emojis).map((key, categoryIndex) => {
               let pageView = [];
               let totalCount = emojis[key].length;
               let pageCount = Math.ceil(totalCount / emojiPageSize);
@@ -84,13 +84,13 @@ export default class EmojiPicker extends Component {
                 let pageEmojis = emojis[key].slice(i * emojiPageSize, (i + 1) * emojiPageSize);
                 pageView.push(
                   <View
-                    key={`${key}_group_${i}`}
+                    key={`category_${categoryIndex}_page_${i}`}
                     style={styles.pageView}
-                    tabLabel={`${key}_group_${i}`}>
+                    tabLabel={`category_${categoryIndex}_page_${i}`}>
                     {pageEmojis.map((emoji, emojiIndex) => {
                       return (
                         <TouchableOpacity
-                          key={emojiIndex}
+                          key={`category_${categoryIndex}_page_${i}_emoji_${emojiIndex}`}
                           style={[
                             styles.image,
                             { width: (window.width - 10) / columns }
@@ -109,7 +109,7 @@ export default class EmojiPicker extends Component {
 
               return (
                 <ScrollableTabView
-                  key={groupIndex}
+                  key={`category_${categoryIndex}`}
                   renderTabBar={this.renderEmojiDotTabBar}
                   tabLabel={emojis[key][0].image}
                   tabBarPosition='bottom'>
