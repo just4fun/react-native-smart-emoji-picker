@@ -52,7 +52,7 @@ export default class EmojiPicker extends Component {
   }
 
   handleEmojiPress(emoji) {
-    this.props.handleEmojiPress(emoji);
+    this.props.onEmojiPress(emoji);
   }
 
   render() {

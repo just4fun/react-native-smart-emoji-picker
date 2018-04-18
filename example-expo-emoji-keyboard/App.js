@@ -18,6 +18,7 @@ export default class App extends React.Component {
       selectedPanel: 'keyboard',
       content: ''
     };
+    this.contentCursorLocation = 0;
   }
 
   showKeyboard = () => {
@@ -80,6 +81,9 @@ export default class App extends React.Component {
                 onFocus={this.handleContentInputFocus}
                 onSelectionChange={this.handleContentSelectionChange}
                 onChangeText={this.handleChangeText}
+                // `onSelectionChange` will only be invoked by `setState({ content })` when `multiline={true}`,
+                // I think it's a bug in React Native.
+                multiline={true}
                 placeholder='Click me!' />
               {selectedPanel === 'emoji' &&
                 <Icon
@@ -103,7 +107,7 @@ export default class App extends React.Component {
             <EmojiPicker
               emojis={CUSTOM_EMOJIS}
               show={selectedPanel === 'emoji'}
-              handleEmojiPress={this.handleEmojiPress} />
+              onEmojiPress={this.handleEmojiPress} />
           </KeyboardAccessory>
         </View>
       </SafeAreaView>
