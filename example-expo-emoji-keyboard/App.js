@@ -1,7 +1,6 @@
 import React from 'react';
 import {
   View,
-  Alert,
   Keyboard,
   TextInput,
   StyleSheet,
@@ -23,27 +22,29 @@ export default class App extends React.Component {
 
   showKeyboard = () => {
     this.contentInput.focus();
-    // https://github.com/facebook/react-native/issues/18003
-    //
-    // This is workaround to bypass the keyboard bug above on iOS 11.2,
-    // which will fire `keyboardWillShow` while keyboard dismiss.
-    this.setState({
-      selectedPanel: 'keyboard'
-    });
+    this.setState({ selectedPanel: 'keyboard' });
   }
 
   hideKeyboard = () => {
     let { selectedPanel } = this.state;
-
     if (selectedPanel === 'keyboard') {
       Keyboard.dismiss();
     }
-
     if (selectedPanel === 'emoji') {
-      this.setState({
-        selectedPanel: 'keyboard'
-      });
+      this.setState({ selectedPanel: 'keyboard' });
     }
+  }
+
+  handleContentInputFocus = () => {
+    this.setState({ selectedPanel: 'keyboard' });
+  }
+
+  handleContentSelectionChange = (event) => {
+    this.contentCursorLocation = event.nativeEvent.selection.start;
+  }
+
+  handleChangeText = (text) => {
+    this.setState({ content: text });
   }
 
   handlePanelSelect = (item) => {
@@ -52,7 +53,6 @@ export default class App extends React.Component {
     } else {
       this.showKeyboard();
     }
-
     this.setState({ selectedPanel: item });
   }
 
@@ -63,10 +63,6 @@ export default class App extends React.Component {
                      + prevState.content.substr(this.contentCursorLocation);
       return { content: newContent };
     });
-  }
-
-  handleContentSelectionChange(event) {
-    this.contentCursorLocation = event.nativeEvent.selection.start;
   }
 
   render() {
@@ -81,14 +77,9 @@ export default class App extends React.Component {
                 ref={component => this.contentInput = component}
                 style={styles.input}
                 value={content}
-                onFocus={() => this.setState({
-                  // https://github.com/facebook/react-native/issues/18003
-                  //
-                  // See more details in `showKeyboard()` method.
-                  selectedPanel: 'keyboard'
-                })}
-                onSelectionChange={(event) => this.handleContentSelectionChange(event)}
-                onChangeText={(text) => this.setState({ content: text })}
+                onFocus={this.handleContentInputFocus}
+                onSelectionChange={this.handleContentSelectionChange}
+                onChangeText={this.handleChangeText}
                 placeholder='Click me!' />
               {selectedPanel === 'emoji' &&
                 <Icon
@@ -111,7 +102,7 @@ export default class App extends React.Component {
             </View>
             <EmojiPicker
               emojis={CUSTOM_EMOJIS}
-              showEmojiPicker={selectedPanel === 'emoji'}
+              show={selectedPanel === 'emoji'}
               handleEmojiPress={this.handleEmojiPress} />
           </KeyboardAccessory>
         </View>
