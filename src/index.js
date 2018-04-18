@@ -11,26 +11,34 @@ import ScrollableTabView from 'react-native-scrollable-tab-view';
 import EmojiTabBar from '../lib/EmojiTabBar';
 import EmojiDotTabBar from '../lib/EmojiDotTabBar';
 
-const EMOJI_PAGE_SIZE = 7 * 3;
+const window = Dimensions.get('window');
 
 export default class EmojiPicker extends Component {
+  static defaultProps = {
+    show: true,
+    height: 250,
+    rows: 3,
+    columns: 7
+  }
+
   constructor(props) {
     super(props);
     this.state = {
-      height: new Animated.Value(props.showEmojiPicker ? 250 : 0),
+      animatedHeight: new Animated.Value(props.show ? props.heigth : 0),
     };
   }
 
   componentDidUpdate() {
-    Animated.timing(this.state.height, {
+    let { show, height } = this.props;
+    Animated.timing(this.state.animatedHeight, {
       duration: 300,
-      toValue: this.props.showEmojiPicker ? 250 : 0
+      toValue: show ? height : 0
     }).start();
   }
 
   renderEmojiTabBar = (props) => {
     return (
-      this.props.showEmojiPicker &&
+      this.props.show &&
         <EmojiTabBar {...props} />
         ||
         <View></View>
@@ -48,21 +56,32 @@ export default class EmojiPicker extends Component {
   }
 
   render() {
-    let { emojis, showEmojiPicker } = this.props;
-    let { height } = this.state;
+    let {
+      emojis,
+      show,
+      rows,
+      columns
+    } = this.props;
+
+    if (!emojis || emojis.length === 0) {
+      throw new Error('`emojis` required. You should pass your custom memes as array to `emojis`.');
+    }
+
+    let { animatedHeight } = this.state;
+    let emojiPageSize = rows * columns;
 
     return (
-      <Animated.View style={{ height }}>
+      <Animated.View style={{ height: animatedHeight }}>
         <ScrollableTabView
           renderTabBar={this.renderEmojiTabBar}
           tabBarPosition='bottom'>
             {Object.keys(emojis).map((key, groupIndex) => {
               let pageView = [];
               let totalCount = emojis[key].length;
-              let pageCount = Math.ceil(totalCount / EMOJI_PAGE_SIZE);
+              let pageCount = Math.ceil(totalCount / emojiPageSize);
 
               for (let i = 0; i < pageCount; i++) {
-                let pageEmojis = emojis[key].slice(i * EMOJI_PAGE_SIZE, (i + 1) * EMOJI_PAGE_SIZE);
+                let pageEmojis = emojis[key].slice(i * emojiPageSize, (i + 1) * emojiPageSize);
                 pageView.push(
                   <View
                     key={`${key}_group_${i}`}
@@ -72,7 +91,10 @@ export default class EmojiPicker extends Component {
                       return (
                         <TouchableOpacity
                           key={emojiIndex}
-                          style={styles.image}
+                          style={[
+                            styles.image,
+                            { width: (window.width - 10) / columns }
+                          ]}
                           onPress={this.handleEmojiPress.bind(this, emoji)}>
                           <Image
                             style={styles.image}
@@ -101,12 +123,10 @@ export default class EmojiPicker extends Component {
   }
 }
 
-const window = Dimensions.get('window');
 
 const styles = StyleSheet.create({
   image: {
     height: 50,
-    width: (window.width - 10) / 7,
     padding: 5
   },
   pageView: {
