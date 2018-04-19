@@ -7,8 +7,9 @@
 
 ## Background
 
-- This library has been abstracted from my React Native app [stuhome](https://github.com/just4fun/stuhome) which was written for iOS only, so **maybe it didn't work in Android now**. But it's in my [Todo](#Todo).
+- This library was abstracted from my React Native app [stuhome](https://github.com/just4fun/stuhome) which was written for iOS only, so **maybe it didn't work in Android now**. But it's in my [Todo](#Todo).
 - When I was developing my app, I found there are lots of emoji picker components for React Native, but all of them only support [regular emojis](https://github.com/iamcal/emoji-data), and what I need are custom memes, so I wrote my own. And yes, I will support regular emojis soon.
+- The [custom emoji file](example-expo-emoji-keyboard/customEmojis.js) in example was crawled (but kept using image url instead of saving them) from the [offcial website](http://bbs.uestc.edu.cn/) which was built for a Chinese University, that said if there are any imporant events like National Congress helding in China, **the example won't work since anyone can't access any college internal websites when you are out of college internet during such 'important' time**. You should update custom emoji file accroding to [Data Structure](#data-structure).
 
 ## Preview
 
