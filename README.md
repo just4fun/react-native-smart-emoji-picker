@@ -34,7 +34,6 @@ import EmojiPicker from 'react-native-smart-emoji-picker';
 
 <EmojiPicker
   emojis={CUSTOM_EMOJIS}
-  show={true}
   onEmojiPress={this.handleEmojiPress} />
 ```
 
