@@ -1,6 +1,6 @@
 {
   "name": "react-native-smart-emoji-picker",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "👹 Smart emoji picker supports any custom memes you provides.",
   "main": "src/index.js",
   "keywords": [
