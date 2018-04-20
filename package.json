@@ -1,8 +1,22 @@
 {
   "name": "react-native-smart-emoji-picker",
   "version": "0.1.0",
+  "description": "👹 Smart emoji picker supports any custom memes you provides.",
   "main": "src/index.js",
-  "repository": "git@github.com:just4fun/react-native-smart-emoji-picker.git",
+  "keywords": [
+    "react",
+    "react-native",
+    "emoji",
+    "emoji-picker"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/just4fun/react-native-smart-emoji-picker.git"
+  },
+  "bugs": {
+    "url": "https://github.com/just4fun/react-native-smart-emoji-picker/issues"
+  },
+  "homepage": "https://github.com/just4fun/react-native-smart-emoji-picker#readme",
   "author": "just4fun <houritsunohikari@gmail.com>",
   "license": "MIT",
   "dependencies": {
