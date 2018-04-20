@@ -24,7 +24,7 @@ export default class EmojiPicker extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      animatedHeight: new Animated.Value(props.show ? props.heigth : 0),
+      animatedHeight: new Animated.Value(props.show ? props.height : 0),
     };
   }
 
