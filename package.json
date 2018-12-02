@@ -20,6 +20,6 @@
   "author": "just4fun <houritsunohikari@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "react-native-scrollable-tab-view": "^0.8.0"
+    "react-native-scrollable-tab-view": "^0.10.0"
   }
 }
