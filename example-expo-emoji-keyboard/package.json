@@ -10,7 +10,7 @@
     "expo": "^31.0.2",
     "react": "16.5.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-31.0.0.tar.gz",
-    "react-native-smart-emoji-picker": "^0.1.1",
+    "react-native-smart-emoji-picker": "^0.1.2",
     "react-native-sticky-keyboard-accessory": "^0.1.2",
     "react-native-vector-icons": "^6.1.0"
   },

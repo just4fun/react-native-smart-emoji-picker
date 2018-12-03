@@ -3743,19 +3743,19 @@ react-native-screens@1.0.0-alpha.15:
   version "1.0.0-alpha.15"
   resolved "https://registry.yarnpkg.com/react-native-screens/-/react-native-screens-1.0.0-alpha.15.tgz#5b5a0041310b46f12048fda1908d52e7290ec18f"
 
-react-native-scrollable-tab-view@^0.8.0:
-  version "0.8.0"
-  resolved "https://registry.yarnpkg.com/react-native-scrollable-tab-view/-/react-native-scrollable-tab-view-0.8.0.tgz#5cb1fcfce07bf530a3c81ab51fc5071144edac5c"
+react-native-scrollable-tab-view@^0.10.0:
+  version "0.10.0"
+  resolved "https://registry.yarnpkg.com/react-native-scrollable-tab-view/-/react-native-scrollable-tab-view-0.10.0.tgz#8ce7908254685ee37d35df7d849676eaa1e81132"
   dependencies:
     create-react-class "^15.6.2"
     prop-types "^15.6.0"
     react-timer-mixin "^0.13.3"
 
-react-native-smart-emoji-picker@^0.1.1:
-  version "0.1.1"
-  resolved "https://registry.yarnpkg.com/react-native-smart-emoji-picker/-/react-native-smart-emoji-picker-0.1.1.tgz#d21ff7665eb0886b2625c579f78d10e641c370b5"
+react-native-smart-emoji-picker@^0.1.2:
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/react-native-smart-emoji-picker/-/react-native-smart-emoji-picker-0.1.2.tgz#9b589db06a1cb2091097c839b8c907ab121cd2a2"
   dependencies:
-    react-native-scrollable-tab-view "^0.8.0"
+    react-native-scrollable-tab-view "^0.10.0"
 
 react-native-sticky-keyboard-accessory@^0.1.2:
   version "0.1.2"
